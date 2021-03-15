@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+require("console.table");
 
 // create the connection information for the sql database
 var connection = mysql.createConnection({
@@ -14,6 +15,13 @@ var connection = mysql.createConnection({
   // Your password
   password: "buhFuh69",
   database: "office_DB"
+});
+
+// connect to the mysql server and sql database
+connection.connect(function(err) {
+  if (err) throw err;
+  // run the start function after the connection is made to prompt the user
+  start();
 });
 
 // connect to the mysql server and sql database
