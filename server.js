@@ -23,3 +23,21 @@ connection.connect(function(err) {
   // run the start function after the connection is made to prompt the user
   start();
 });
+
+function start() {
+  inquirer
+    .prompt({
+      name: "start",
+      type: "list",
+      message: "Welcome to CLI Employee Tracker. How would you like to start?",
+      choices: [
+        "View Employees",
+        "View Employees by Department",
+        "Add an Employee",
+        "Remove an Employee",
+        "Update Employee Role",
+        "Add Role",
+        "Exit Application"
+      ]
+    })
+}
