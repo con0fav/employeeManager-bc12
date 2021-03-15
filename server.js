@@ -31,13 +31,23 @@ function start() {
       type: "list",
       message: "Welcome to CLI Employee Tracker. How would you like to start?",
       choices: [
-        "View Employees",
-        "View Employees by Department",
+        "List Employees",
+        "List Employees by Department",
         "Add an Employee",
         "Remove an Employee",
         "Update Employee Role",
         "Add Role",
         "Exit Application"
       ]
+    }).then(function ({start}) {
+      switch (task) {
+        case "List Employees":
+          listEmployees();
+          break;
+      
+        case "exit":
+          connection.end();
+          break;
+      }
     })
 }
