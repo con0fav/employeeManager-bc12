@@ -2,6 +2,10 @@ var mysql = require("mysql");
 var inquirer = require("inquirer");
 require("console.table");
 
+const employee = require("./classes/employee");
+const department = require("./classes/department");
+const role = require("./classes/role");
+
 // create the connection information for the sql database
 var connection = mysql.createConnection({
   host: "localhost",
