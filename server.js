@@ -44,7 +44,7 @@ function start() {
         "Exit Application"
       ]
     }).then(function ({start}) {
-      switch (task) {
+      switch (start) {
         case "List Employees":
           listEmp();
           break;
@@ -68,4 +68,18 @@ function start() {
           break;
       }
     })
+}
+
+function listEmp() {
+  console.log("Viewing employees:")
+
+  connection.query(
+    "SELECT * from department, role, employee",
+    function(err, res){
+      if (err) throw err;
+
+      console.table(res);
+      start();
+    }
+  )
 }
