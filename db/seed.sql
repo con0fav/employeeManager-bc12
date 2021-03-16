@@ -10,15 +10,15 @@ INSERT INTO department (name)
 VALUES ("Management");
 
 INSERT INTO role (title, salary, department_id)
-VALUES ("Accountant", 100000, 1);
+VALUES ("Accountant", 1.4, 1);
 INSERT INTO role (title, salary, department_id)
-VALUES ("Bean Counter", 150000, 1);
+VALUES ("Bean Counter", 1.5, 1);
 INSERT INTO role (title, salary, department_id)
-VALUES ("Lawyer", 120000, 2);
+VALUES ("Lawyer", 2.4, 2);
 INSERT INTO role (title, salary, department_id)
-VALUES ("Paralegal", 125000, 2);
+VALUES ("Paralegal", 2.1, 2);
 INSERT INTO role (title, salary, department_id)
-VALUES ("Team Lead", 250000, 3);
+VALUES ("Team Lead", 1.2, 3);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("Ann", "Nonymous", 1, 3);
