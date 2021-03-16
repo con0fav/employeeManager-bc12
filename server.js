@@ -46,9 +46,23 @@ function start() {
     }).then(function ({start}) {
       switch (task) {
         case "List Employees":
-          listEmployees();
+          listEmp();
           break;
-      
+        case "List Employees by Department":
+          listDept();
+          break;
+        case "Add an Employee":
+          addEmp();
+          break;
+        case "Remove an Employee":
+          deleteEmp();
+          break;
+        case "Update Employee Role":
+          updateEmp();
+          break;
+        case "Add Role":
+          addRole();
+          break;
         case "exit":
           connection.end();
           break;
