@@ -37,8 +37,8 @@ function start() {
       choices: [
         "List Employees",
         "List Employees by Department",
+        "List Employees by Role",
         "Add an Employee",
-        "Remove an Employee",
         "Update Employee Role",
         "Add Role",
         "Exit Application"
@@ -48,7 +48,7 @@ function start() {
         case "List Employees":
           listEmp();
           break;
-        case "List Departments":
+        case "List Employees by Department":
           listDept();
           break;
         case "List Employees by Role":
@@ -115,7 +115,22 @@ function listRoles() {
   );
 }
 
+function listRoles() {
+  console.log("Viewing roles:")
+
+  connection.query(
+    "SELECT * from office_DB.role",
+    function (err, res) {
+      if (err) throw err;
+
+      console.table(res);
+      start();
+    }
+  );
+}
+
 function addEmp() {
+
   const addEmpQ = [
     {
       type: "input",
@@ -128,19 +143,49 @@ function addEmp() {
       name: "last_name"
     },
     {
-      type: "input",
+      type: "number",
       message: "Employee's role",
-      name: "titleID"
+      name: "role_id"
     },
     {
-      type: "input",
+      type: "number",
       message: "Employee's manager ID",
-      name: "managerID"
+      name: "manager_id"
     }
   ];
 
-  inquirer.prompt(addEmpQ).then(function(answer) {
-    console.table(answer);
-  } )
+  inquirer.prompt(addEmpQ).then(function (answer) {
+    // console.table(answer);
+
+    connection.query("INSERT INTO employee SET ?", answer)
+  })
 
 }
+
+function updateEmp() {
+  connection.query(
+    "SELECT * from office_DB.employee",
+    function (err, res) {
+      if (err) throw err;
+
+      console.table(res);
+    }
+  );
+
+  inquirer.prompt([
+    {
+      type: "number",
+      message: "Select employee by ID to update",
+      name: "empIDSelect"
+    },
+    {
+      type: "number",
+      message: "Select role you want to assign to employee",
+      name: "empRoleSelect"
+    }
+  ]).then(function (answer) {
+    connection.query("UPDATE employee SET role_id = ? WHERE id = ?", [answer.empRoleSelect, answer.empIDSelect] )
+  })
+
+}
+
