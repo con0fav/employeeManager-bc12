@@ -142,9 +142,10 @@ function addEmp() {
   ];
 
   inquirer.prompt(addEmpQ).then(function (answer) {
-    // console.table(answer);
-
-    connection.query("INSERT INTO employee SET ?", answer)
+    connection.query("INSERT INTO employee SET ?", answer, function (err, res) {
+      if (err) throw err;
+      start();
+    })
   })
 }
 
@@ -187,7 +188,11 @@ function addRole () {
   ];
 
   inquirer.prompt(addRoleQ).then(function (answer) {
-    connection.query("INSERT INTO role SET ?", answer)
+    connection.query("INSERT INTO role SET ?", answer, 
+    function (err, res) {
+      if (err) throw err;
+      start();
+    })
   })
 
 }
