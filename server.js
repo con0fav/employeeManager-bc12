@@ -17,7 +17,7 @@ var connection = mysql.createConnection({
   user: "root",
 
   // Your password
-  password: "buhFuh69",
+  password: "BuhFuh69",
   database: "office_DB"
 });
 
@@ -77,7 +77,7 @@ function listEmp() {
   console.log("Viewing employees:")
 
   connection.query(
-    "SELECT * from department, role, employee",
+    "SELECT * from office_DB.employee",
     function (err, res) {
       if (err) throw err;
 
@@ -91,7 +91,7 @@ function listDept() {
   console.log("Viewing departments:")
 
   connection.query(
-    "SELECT * from department",
+    "SELECT * from office_DB.department",
     function (err, res) {
       if (err) throw err;
 
@@ -105,7 +105,7 @@ function listRoles() {
   console.log("Viewing roles:")
 
   connection.query(
-    "SELECT * from role",
+    "SELECT * from office_DB.role",
     function (err, res) {
       if (err) throw err;
 
@@ -137,5 +137,10 @@ function addEmp() {
       message: "Employee's manager ID",
       name: "managerID"
     }
-  ]
+  ];
+
+  inquirer.prompt(addEmpQ).then(function(answer) {
+    console.table(answer);
+  } )
+
 }
