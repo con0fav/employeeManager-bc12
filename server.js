@@ -114,3 +114,28 @@ function listRoles() {
     }
   );
 }
+
+function addEmp() {
+  const addEmpQ = [
+    {
+      type: "input",
+      message: "Employee's first name",
+      name: "first_name"
+    },
+    {
+      type: "input",
+      message: "Employee's last name",
+      name: "last_name"
+    },
+    {
+      type: "input",
+      message: "Employee's role",
+      name: "titleID"
+    },
+    {
+      type: "input",
+      message: "Employee's manager ID",
+      name: "managerID"
+    }
+  ]
+}
