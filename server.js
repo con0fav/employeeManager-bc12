@@ -36,13 +36,12 @@ function start() {
       message: "Welcome to CLI Employee Tracker. How would you like to start?",
       choices: [
         "List Employees",
-        "List Employees by Department",
-        "List Employees by Role",
+        "List Departments",
+        "List Roles",
         "Add an Employee",
         "Add a Department",
         "Add Role",
         "Update Employee Role",
-        "Add Role",
         "Exit"
       ]
     }).then(function ({ start }) {
@@ -50,16 +49,16 @@ function start() {
         case "List Employees":
           listEmp();
           break;
-        case "List Employees by Department":
+        case "List Departments":
           listDept();
           break;
-        case "List Employees by Role":
+        case "List Roles":
           listRoles();
           break;
         case "Add an Employee":
           addEmp();
           break;
-        case "Add a department":
+        case "Add a Department":
           addDept();
           break;
         case "Add Role":
@@ -149,6 +148,55 @@ function addEmp() {
   })
 }
 
+function addDept() {
+  const addRoleQ = [
+    {
+      type: "input",
+      message: "Enter role title",
+      name: "title"
+    },
+    {
+      type: "number",
+      message: "Enter role salary",
+      name: "salary"
+    },
+    {
+      type: "number",
+      message: "Enter department ID",
+      name: "department_id"
+    }
+  ];
+
+  inquirer.prompt(addRoleQ).then(function (answer) {
+    connection.query("INSERT INTO role SET ?", answer)
+  })
+
+}
+
+function addRole () {
+  const addRoleQ = [
+    {
+      type: "input",
+      message: "Enter role title",
+      name: "title"
+    },
+    {
+      type: "number",
+      message: "Enter role salary",
+      name: "salary"
+    },
+    {
+      type: "number",
+      message: "Enter department ID",
+      name: "department_id"
+    }
+  ];
+
+  inquirer.prompt(addRoleQ).then(function (answer) {
+    connection.query("INSERT INTO role SET ?", answer)
+  })
+
+}
 
 
 function updateEmp() {
