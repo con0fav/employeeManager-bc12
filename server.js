@@ -149,26 +149,20 @@ function addEmp() {
 }
 
 function addDept() {
-  const addRoleQ = [
+  const addDeptQ = [
     {
       type: "input",
-      message: "Enter role title",
-      name: "title"
-    },
-    {
-      type: "number",
-      message: "Enter role salary",
-      name: "salary"
-    },
-    {
-      type: "number",
-      message: "Enter department ID",
-      name: "department_id"
+      message: "Enter department name",
+      name: "name"
     }
   ];
 
-  inquirer.prompt(addRoleQ).then(function (answer) {
-    connection.query("INSERT INTO role SET ?", answer)
+  inquirer.prompt(addDeptQ).then(function (answer) {
+    connection.query("INSERT INTO department SET ?", answer,
+    function (err, res) {
+      if (err) throw err;
+      start();
+    })
   })
 
 }
@@ -187,7 +181,7 @@ function addRole () {
     },
     {
       type: "number",
-      message: "Enter department ID",
+      message: "Enter role ID",
       name: "department_id"
     }
   ];
