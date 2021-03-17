@@ -39,9 +39,11 @@ function start() {
         "List Employees by Department",
         "List Employees by Role",
         "Add an Employee",
+        "Add a Department",
+        "Add Role",
         "Update Employee Role",
         "Add Role",
-        "Exit Application"
+        "Exit"
       ]
     }).then(function ({ start }) {
       switch (start) {
@@ -66,7 +68,7 @@ function start() {
         case "Update Employee Role":
           updateEmp();
           break;
-        case "exit":
+        case "Exit":
           connection.end();
           break;
       }
@@ -92,20 +94,6 @@ function listDept() {
 
   connection.query(
     "SELECT * from office_DB.department",
-    function (err, res) {
-      if (err) throw err;
-
-      console.table(res);
-      start();
-    }
-  );
-}
-
-function listRoles() {
-  console.log("Viewing roles:")
-
-  connection.query(
-    "SELECT * from office_DB.role",
     function (err, res) {
       if (err) throw err;
 
@@ -159,8 +147,9 @@ function addEmp() {
 
     connection.query("INSERT INTO employee SET ?", answer)
   })
-
 }
+
+
 
 function updateEmp() {
   connection.query(
@@ -184,7 +173,10 @@ function updateEmp() {
       name: "empRoleSelect"
     }
   ]).then(function (answer) {
-    connection.query("UPDATE employee SET role_id = ? WHERE id = ?", [answer.empRoleSelect, answer.empIDSelect] )
+    connection.query("UPDATE employee SET role_id = ? WHERE id = ?", [answer.empRoleSelect, answer.empIDSelect], function (err, res) {
+      if (err) throw err;
+      start();
+    })
   })
 
 }
