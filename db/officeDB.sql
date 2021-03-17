@@ -1,4 +1,3 @@
-DROP DATABASE IF EXISTS office_DB;
 CREATE DATABASE office_DB;
 
 USE office_DB;
