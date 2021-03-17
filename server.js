@@ -22,7 +22,7 @@ var connection = mysql.createConnection({
 });
 
 // connect to the mysql server and sql database
-connection.connect(function(err) {
+connection.connect(function (err) {
   if (err) throw err;
   // run the start function after the connection is made to prompt the user
   start();
@@ -43,25 +43,28 @@ function start() {
         "Add Role",
         "Exit Application"
       ]
-    }).then(function ({start}) {
+    }).then(function ({ start }) {
       switch (start) {
         case "List Employees":
           listEmp();
           break;
-        case "List Employees by Department":
+        case "List Departments":
           listDept();
+          break;
+        case "List Employees by Role":
+          listRoles();
           break;
         case "Add an Employee":
           addEmp();
           break;
-        case "Remove an Employee":
-          deleteEmp();
-          break;
-        case "Update Employee Role":
-          updateEmp();
+        case "Add a department":
+          addDept();
           break;
         case "Add Role":
           addRole();
+          break;
+        case "Update Employee Role":
+          updateEmp();
           break;
         case "exit":
           connection.end();
@@ -75,12 +78,39 @@ function listEmp() {
 
   connection.query(
     "SELECT * from department, role, employee",
-    function(err, res){
+    function (err, res) {
       if (err) throw err;
 
       console.table(res);
       start();
     }
-  )
+  );
+};
+
+function listDept() {
+  console.log("Viewing departments:")
+
+  connection.query(
+    "SELECT * from department",
+    function (err, res) {
+      if (err) throw err;
+
+      console.table(res);
+      start();
+    }
+  );
 }
 
+function listRoles() {
+  console.log("Viewing roles:")
+
+  connection.query(
+    "SELECT * from role",
+    function (err, res) {
+      if (err) throw err;
+
+      console.table(res);
+      start();
+    }
+  );
+}
